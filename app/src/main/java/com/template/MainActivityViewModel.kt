@@ -14,4 +14,14 @@ class MainActivityViewModel: ViewModel() {
     fun postPostsIndex(index: Int){
         _postsIndex.postValue(index)
     }
+
+
+    private val _partName = MutableLiveData<String>().apply {
+        value = ""
+    }
+    val partName: LiveData<String> = _partName
+    fun postPartName(name: String){
+        _partName.postValue(name)
+    }
+
 }

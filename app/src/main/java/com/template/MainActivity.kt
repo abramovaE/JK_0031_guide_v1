@@ -1,7 +1,6 @@
 package com.template
 
 import android.os.Bundle
-import android.util.Log
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -51,7 +50,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateTitle(index: Int){
-        Log.d("TAG", "updateTitle: $index")
         val parts = assets.list("content")
         if (parts != null) {
             binding.appBarMain.toolbar.title = parts[index]
@@ -63,3 +61,4 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
+

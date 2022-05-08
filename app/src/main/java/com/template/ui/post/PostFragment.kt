@@ -1,9 +1,7 @@
 package com.template.ui.post
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +14,6 @@ import com.template.ui.main_menu.MainMenuFragment
 class PostFragment : Fragment() {
 
     private var _binding: FragmentPostBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -28,9 +25,6 @@ class PostFragment : Fragment() {
         val root: View = binding.root
 
         var postPath = arguments?.getString("postPath", "post")
-
-        Log.d("TAG", "textPath: $postPath")
-
         val textView: TextView = binding.textView
         val image = binding.image
             var textContent = postPath?.let {

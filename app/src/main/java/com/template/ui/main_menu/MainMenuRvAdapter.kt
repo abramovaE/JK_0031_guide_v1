@@ -9,7 +9,6 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.RecyclerView
 import com.template.R
 
@@ -18,7 +17,6 @@ class MainMenuRvAdapter(private val content: Array<String>,
                         private val context: Context,
                         private val itemClickListener: OnItemClick
                         ): RecyclerView.Adapter<MainMenuRvAdapter.MainMenuViewHolder>() {
-
 
     class MainMenuViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
        val textView = itemView.findViewById<TextView>(R.id.textView)

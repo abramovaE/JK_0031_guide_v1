@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="horizontal"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    android:background="@color/primary_light">
 
     <include
         android:id="@+id/app_bar_main"
@@ -22,5 +23,12 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
+        app:itemTextColor="@color/primary_dark"
+        app:itemIconTint="@color/primary_dark"
+        android:background="@color/primary_light"
+
+
+
+
         app:menu="@menu/activity_main_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>
