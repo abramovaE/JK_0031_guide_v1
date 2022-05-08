@@ -17,9 +17,4 @@ class PostsViewModel : ViewModel() {
     }
     val content: LiveData<List<String>> =  _content
 
-
-    private val _postId = MutableLiveData<Int>().apply {
-        value = 0
-    }
-    val postId: LiveData<Int> = _postId
 }

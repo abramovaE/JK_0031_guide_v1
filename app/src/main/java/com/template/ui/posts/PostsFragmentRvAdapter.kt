@@ -1,5 +1,6 @@
 package com.template.ui.posts
 
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.template.R
 
 class PostsFragmentRvAdapter(private val content: Array<String>,
+                             private val images: HashMap<String, Bitmap>,
                              private val clickListener: OnItemClick):
     RecyclerView.Adapter<PostsFragmentRvAdapter.F1FragmentViewHolder>() {
 
@@ -26,8 +28,9 @@ class PostsFragmentRvAdapter(private val content: Array<String>,
 
     override fun onBindViewHolder(holder: F1FragmentViewHolder, position: Int) {
         holder.textView.setText(content[position])
+        holder.imageButton.setImageBitmap(images.get(content[position]))
         holder.imageButton.setOnClickListener({ v->
-            clickListener.onItemClick(position)
+            clickListener.onItemClick(content[position])
         })
     }
 

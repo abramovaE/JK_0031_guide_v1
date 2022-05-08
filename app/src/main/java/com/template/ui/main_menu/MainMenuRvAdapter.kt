@@ -1,17 +1,20 @@
 package com.template.ui.main_menu
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.RecyclerView
 import com.template.R
 
 class MainMenuRvAdapter(private val content: Array<String>,
-                        private val images: List<Int>,
+                        private val images: List<Bitmap>,
                         private val context: Context,
                         private val itemClickListener: OnItemClick
                         ): RecyclerView.Adapter<MainMenuRvAdapter.MainMenuViewHolder>() {
@@ -30,7 +33,10 @@ class MainMenuRvAdapter(private val content: Array<String>,
 
     override fun onBindViewHolder(holder: MainMenuViewHolder, position: Int) {
         holder.textView.text = content[position]
-        holder.imageBtn.background = ContextCompat.getDrawable(context, images[position])
+        holder.imageBtn.setImageBitmap(images[position])
+        holder.imageBtn.scaleType = ImageView.ScaleType.FIT_CENTER
+        holder.imageBtn.background = ContextCompat
+            .getDrawable(context, R.drawable.rv_main_menu_item)
         holder.imageBtn.setOnClickListener({ v->
             itemClickListener.onItemClick(position)
         })
@@ -39,14 +45,4 @@ class MainMenuRvAdapter(private val content: Array<String>,
     override fun getItemCount(): Int {
         return content.size
     }
-
-    fun getImageId(position: Int): Int {
-        var id = "img$position"
-        return context.resources.getIdentifier(
-            id,
-            "drawable",
-            "com.template"
-        )
-    }
-
 }

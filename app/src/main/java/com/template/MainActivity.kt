@@ -12,14 +12,12 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.template.databinding.ActivityMainBinding
-import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainActivityViewModel: MainActivityViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,19 +32,7 @@ class MainActivity : AppCompatActivity() {
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-
-//        var rootFile = File("/android_asset")
-//        for(f in rootFile.listFiles()){
-//            Log.d("TAG", "root: $f")
-//            if(f.isDirectory){
-//                for(d in f.listFiles()){
-//                    Log.d("TAG", "root: $d")
-//                }
-//            }
-//        }
-
         val parts = assets.list("content")
-        mainActivityViewModel.postParts(parts)
 
         if (parts != null) {
             for(index in parts.indices){
@@ -62,8 +48,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-
     }
 
     fun updateTitle(index: Int){
@@ -71,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         val parts = assets.list("content")
         if (parts != null) {
             binding.appBarMain.toolbar.title = parts[index]
-
         }
     }
 

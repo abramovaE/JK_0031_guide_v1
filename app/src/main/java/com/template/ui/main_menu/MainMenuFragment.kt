@@ -1,5 +1,7 @@
 package com.template.ui.main_menu
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -36,23 +38,29 @@ class MainMenuFragment : Fragment(), OnItemClick {
         val root: View = binding.root
         val rv: RecyclerView = binding.rv
 
-//        mainActivityViewModel.postsIndex.observe(viewLifecycleOwner, {
-            val parts = requireActivity().assets.list("content")
+        val parts = requireActivity().assets.list("content")
 
-            val images = arrayListOf<Int>(R.drawable.img1,
-                R.drawable.img2,
-                R.drawable.img3,
-                R.drawable.img4,
-                R.drawable.img5)
-            val adapter = MainMenuRvAdapter(parts as Array<String>,
-                images, requireContext(), this)
-            rv.adapter = adapter
-//        })
+        val images = mutableListOf<Bitmap>()
+        if (parts != null) {
+            for((index, element) in parts.withIndex()){
 
+                val imgPath = requireActivity().assets.list( "content/$element")?.get(index)
+                Log.d("TAG", "log: " + imgPath)
 
+                val bytes = requireActivity().assets.open("content/$element/part_img.png").readBytes()
 
+//                val bytes = imgPath?.let { requireActivity().assets.open(it).readBytes() }
 
+                val bitmap = bytes?.let { BitmapFactory.decodeByteArray(bytes, 0, it.size) }
+                if (bitmap != null) {
+                    images.add(bitmap)
+                }
+            }
+        }
 
+        val adapter = MainMenuRvAdapter(parts as Array<String>,
+            images, requireContext(), this)
+        rv.adapter = adapter
         return root
     }
 

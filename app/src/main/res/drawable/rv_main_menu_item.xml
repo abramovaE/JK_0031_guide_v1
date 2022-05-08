@@ -2,17 +2,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    <item>-->
-<!--        <bitmap android:src="@drawable/gradient"/>-->
-<!--    </item>-->
 
-<!--    <item>-->
-<!--        <bitmap-->
-<!--            android:src="@drawable/side_nav_bar">-->
-<!--        </bitmap>-->
-<!--    </item>-->
-
-    <item android:width="120dp" android:height="120dp">
+    <item>
         <shape android:shape="rectangle">
             <corners android:radius="10dp"/>
             <gradient android:angle="90"
