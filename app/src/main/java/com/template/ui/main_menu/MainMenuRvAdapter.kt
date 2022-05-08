@@ -23,7 +23,7 @@ class MainMenuRvAdapter(private val content: Array<String>,
         val imageBtn = itemView.findViewById<ImageButton>(R.id.imageButton)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainMenuRvAdapter.MainMenuViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainMenuViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.rv_main_menu_item, parent,false)
         return MainMenuViewHolder(itemView)
@@ -35,9 +35,9 @@ class MainMenuRvAdapter(private val content: Array<String>,
         holder.imageBtn.scaleType = ImageView.ScaleType.FIT_CENTER
         holder.imageBtn.background = ContextCompat
             .getDrawable(context, R.drawable.rv_main_menu_item)
-        holder.imageBtn.setOnClickListener({ v->
-            itemClickListener.onItemClick(position)
-        })
+        holder.imageBtn.setOnClickListener {
+            itemClickListener.onItemClick(content[position])
+        }
     }
 
     override fun getItemCount(): Int {

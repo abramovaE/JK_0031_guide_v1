@@ -24,7 +24,6 @@
     <fragment
         android:id="@+id/nav_f2"
         android:name="com.template.ui.posts.PostsFragment"
-        android:label="@string/menu_f2"
         tools:layout="@layout/fragment_posts">
         <argument
             android:defaultValue="1"

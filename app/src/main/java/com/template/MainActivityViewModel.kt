@@ -5,23 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainActivityViewModel: ViewModel() {
-
-    private val _postsIndex = MutableLiveData<Int>().apply {
-        value = 0
-    }
-    val postsIndex: LiveData<Int> = _postsIndex
-
-    fun postPostsIndex(index: Int){
-        _postsIndex.postValue(index)
-    }
-
-
-    private val _partName = MutableLiveData<String>().apply {
+    private val _title = MutableLiveData<String>().apply {
         value = ""
     }
-    val partName: LiveData<String> = _partName
-    fun postPartName(name: String){
-        _partName.postValue(name)
+    val title: LiveData<String> = _title
+    fun postTitle(title: String){
+        _title.postValue(title)
     }
-
 }

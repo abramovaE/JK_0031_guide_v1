@@ -16,7 +16,7 @@ class ExitFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentExitBinding.inflate(inflater, container, false)
         val root: View = binding.root
         requireActivity().finish()

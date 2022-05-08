@@ -26,32 +26,34 @@ class PostsFragment : Fragment(), OnItemClick {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val mainActivityViewModel =
-            ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
+            ViewModelProvider(requireActivity())[MainActivityViewModel::class.java]
+
+
         _binding = FragmentPostsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val rv = binding.rv
         val postIndex = arguments?.getInt("postsIndex")
-        postIndex?.let { mainActivityViewModel.postPostsIndex(it) }
-        var assets = requireActivity().assets.list("content")
-        var fileName = postIndex?.let { assets?.get(it) }
+
+        val assets = requireActivity().assets.list("content")
+        val fileName = postIndex?.let {
+            assets?.get(it)
+        }
+        fileName?.let { mainActivityViewModel.postTitle(it) }
         if (fileName != null) {
             this.fileName = fileName
         }
-        var file = requireActivity().assets.list("content/${fileName}")
-        var map = mutableMapOf<String, Bitmap>()
-        var posts = mutableListOf<String>()
+        val file = requireActivity().assets.list("content/${fileName}")
+        val map = mutableMapOf<String, Bitmap>()
+        val posts = mutableListOf<String>()
         if (file != null) {
             for(f in file){
                 if(!f.contains("img")){
                     posts.add(f)
-                    val postName = f
                     val bytes = requireActivity().assets.open("content/${fileName}/$f" + "/image.png").readBytes()
                     val postImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-
-                    map.put(postName, postImage)
-
+                    map[f] = postImage
                 }
             }
         }
@@ -65,11 +67,12 @@ class PostsFragment : Fragment(), OnItemClick {
         _binding = null
     }
 
-    override fun onItemClick(filename: String) {
-        var file = "content/${fileName}/${filename}"
-        var postFragment = PostFragment()
-        var arguments = Bundle();
+    override fun onItemClick(fileName: String) {
+        val file = "content/${this.fileName}/${fileName}"
+        val postFragment = PostFragment()
+        val arguments = Bundle()
         arguments.putString("postPath", file)
+        arguments.putString("title", fileName)
         postFragment.arguments = arguments
         parentFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment_content_main, postFragment).commit()

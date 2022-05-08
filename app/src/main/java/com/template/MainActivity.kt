@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        mainActivityViewModel.postsIndex.observe(this, this::updateTitle)
+        mainActivityViewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
+        mainActivityViewModel.title.observe(this, this::updateTitle)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -49,16 +49,14 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    fun updateTitle(index: Int){
-        val parts = assets.list("content")
-        if (parts != null) {
-            binding.appBarMain.toolbar.title = parts[index]
-        }
+    private fun updateTitle(title: String){
+        binding.appBarMain.toolbar.title = title
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
 }
 

@@ -16,8 +16,8 @@ class PostsFragmentRvAdapter(private val content: Array<String>,
     RecyclerView.Adapter<PostsFragmentRvAdapter.F1FragmentViewHolder>() {
 
     class F1FragmentViewHolder(itemView: View): ViewHolder(itemView){
-        val textView = itemView.findViewById<TextView>(R.id.textView)
-        val imageButton = itemView.findViewById<ImageButton>(R.id.imageButton)
+        val textView: TextView = itemView.findViewById(R.id.textView)
+        val imageButton: ImageButton = itemView.findViewById(R.id.imageButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): F1FragmentViewHolder {
@@ -27,11 +27,11 @@ class PostsFragmentRvAdapter(private val content: Array<String>,
     }
 
     override fun onBindViewHolder(holder: F1FragmentViewHolder, position: Int) {
-        holder.textView.setText(content[position])
-        holder.imageButton.setImageBitmap(images.get(content[position]))
-        holder.imageButton.setOnClickListener({ v->
+        holder.textView.text = content[position]
+        holder.imageButton.setImageBitmap(images[content[position]])
+        holder.imageButton.setOnClickListener {
             clickListener.onItemClick(content[position])
-        })
+        }
     }
 
     override fun getItemCount(): Int {

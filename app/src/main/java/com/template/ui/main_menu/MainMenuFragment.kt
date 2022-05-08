@@ -19,13 +19,14 @@ class MainMenuFragment : Fragment(), OnItemClick {
     private lateinit var mainActivityViewModel: MainActivityViewModel
     private var _binding: FragmentMainMenuBinding? = null
     private val binding get() = _binding!!
+    private lateinit var content: Array<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        mainActivityViewModel = ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
+    ): View {
+        mainActivityViewModel = ViewModelProvider(requireActivity())[MainActivityViewModel::class.java]
 
         _binding = FragmentMainMenuBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -35,29 +36,28 @@ class MainMenuFragment : Fragment(), OnItemClick {
 
         val images = mutableListOf<Bitmap>()
         if (parts != null) {
-            for((index, element) in parts.withIndex()){
-                val imgPath = requireActivity().assets.list( "content/$element")?.get(index)
+            for(element in parts){
                 val bytes = requireActivity().assets.open("content/$element/part_img.png").readBytes()
-                val bitmap = bytes?.let { BitmapFactory.decodeByteArray(bytes, 0, it.size) }
+                val bitmap = bytes.let { BitmapFactory.decodeByteArray(bytes, 0, it.size) }
                 if (bitmap != null) {
                     images.add(bitmap)
                 }
             }
         }
-        val adapter = MainMenuRvAdapter(parts as Array<String>,
+
+        this.content = parts as Array<String>
+
+        val adapter = MainMenuRvAdapter(content,
             images, requireContext(), this)
         rv.adapter = adapter
         return root
     }
 
-
-    override fun onItemClick(position: Int){
-        var postsFragment = PostsFragment()
-        mainActivityViewModel.postPostsIndex(position)
-
-
-        var arguments = Bundle()
-        arguments.putInt("postsIndex", position)
+    override fun onItemClick(fileName: String){
+        val postsFragment = PostsFragment()
+        mainActivityViewModel.postTitle(fileName)
+        val arguments = Bundle()
+        arguments.putString("fileName", fileName)
         postsFragment.arguments = arguments
         parentFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment_content_main, postsFragment).commit()
@@ -70,5 +70,5 @@ class MainMenuFragment : Fragment(), OnItemClick {
 }
 
 interface OnItemClick{
-    fun onItemClick(position: Int)
+    fun onItemClick(fileName: String)
 }
