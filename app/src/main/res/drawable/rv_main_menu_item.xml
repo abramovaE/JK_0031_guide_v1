@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<!--    <item>-->
+<!--        <bitmap android:src="@drawable/gradient"/>-->
+<!--    </item>-->
+
+<!--    <item>-->
+<!--        <bitmap-->
+<!--            android:src="@drawable/side_nav_bar">-->
+<!--        </bitmap>-->
+<!--    </item>-->
+
+    <item android:width="120dp" android:height="120dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="10dp"/>
+            <gradient android:angle="90"
+                android:startColor="@color/black_t"
+                android:endColor="@color/white_t"/>
+        </shape>
+    </item>
+
+</layer-list>
