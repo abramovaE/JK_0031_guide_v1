@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_f3, R.id.nav_f4, R.id.nav_f5, R.id.nav_exit
             ), drawerLayout
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

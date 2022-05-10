@@ -30,7 +30,6 @@ class PostsFragment : Fragment(), OnItemClick {
         val mainActivityViewModel =
             ViewModelProvider(requireActivity())[MainActivityViewModel::class.java]
 
-
         _binding = FragmentPostsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val rv = binding.rv
